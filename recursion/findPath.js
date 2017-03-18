@@ -32,3 +32,4 @@ function findPath(row, col) {
 
 findPath(ROW-1, COLUMN-1);
 console.log(path);
+
