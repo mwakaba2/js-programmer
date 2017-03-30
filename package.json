@@ -1,0 +1,22 @@
+{
+  "name": "js-programmer",
+  "version": "1.0.0",
+  "description": "js practice with Data structures and Algorithms",
+  "scripts": {
+    "test": "mocha test/ --reporter=nyan"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwakaba2/js-programmer.git"
+  },
+  "author": "Mariko Wakabayashi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mwakaba2/js-programmer/issues"
+  },
+  "homepage": "https://github.com/mwakaba2/js-programmer#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}
