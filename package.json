@@ -17,6 +17,7 @@
   "homepage": "https://github.com/mwakaba2/js-programmer#readme",
   "devDependencies": {
     "chai": "^3.5.0",
+    "cheerio": "^0.22.0",
     "mocha": "^3.2.0"
   }
 }
