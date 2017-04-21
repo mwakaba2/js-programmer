@@ -32,15 +32,26 @@ function flipToWin(n){
   return max;
 }
 
-// // testing if all zeroes
-// console.log(flipToWin(0));
-// // // test with couple zeroes
-// console.log(flipToWin(5));
-// // // test with all ones
-// console.log(flipToWin(15));
-// // test with larger example
-// console.log(flipToWin(1775));
+function flipWinSol(n) {
+  if(~n === 0) {
+    return 53;
+  }
+  let currLength = 0;
+  let prevLength = 0;
+  let maxLength = 1;
+  while(n != 0) {
+    if((n & 1) === 1) {
+      currLength++;
+    } else if ((n & 1) === 0) {
+      prevLength = (n & 2) === 0 ? 0 : currLength;
+      currLength = 0;
+    }
+    maxLength = Math.max(prevLength + currLength + 1, maxLength);
+    n >>= 1;
+  }
+  return maxLength;
+}
 
 module.exports = {
-  getMax, flipToWin
+  getMax, flipToWin, flipWinSol
 }
