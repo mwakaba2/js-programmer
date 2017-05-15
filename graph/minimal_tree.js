@@ -1,10 +1,4 @@
-class TreeNode {
-  constructor(val) {
-    this.val = val;
-    this.left = null;
-    this.right = null;
-  }
-}
+var { TreeNode } = require('./tree');
 
 function inOrderTraversal(node, arr) {
   if (!node) {
