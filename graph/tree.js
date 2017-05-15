@@ -61,6 +61,25 @@ function prettyPrint(depthList) {
   }
 }
 
+function checkHeight(root) {
+  if (root === null) {
+    return -1;
+  }
+  let leftHeight = checkHeight(root.left);
+  if(leftHeight === Number.MIN_VALUE) return Number.MIN_VALUE;
+  let rightHeight = checkHeight(root.right);
+  if(rightHeight === Number.MIN_VALUE) return Number.MIN_VALUE;
+  if(Math.abs(leftHeight - rightHeight) > 1) {
+    return Number.MIN_VALUE;
+  } else {
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+}
+
+function isBalanced(root) {
+  return checkHeight(root) !== Number.MIN_VALUE;
+}
+
 module.exports = {
-  TreeNode, listOfDepths, Tree, prettyPrint, listOfDepthsDFS
+  TreeNode, listOfDepths, Tree, prettyPrint, listOfDepthsDFS, isBalanced
 };

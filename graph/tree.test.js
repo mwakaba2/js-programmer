@@ -1,4 +1,4 @@
-var { listOfDepths, TreeNode, Tree, prettyPrint, listOfDepthsDFS } = require('./tree');
+var { listOfDepths, TreeNode, Tree, prettyPrint, listOfDepthsDFS, isBalanced } = require('./tree');
 
 var node1 = new TreeNode('a');
 var node2 = new TreeNode('b');
@@ -17,3 +17,9 @@ var depthList2 = [];
 listOfDepthsDFS(tree.root, depthList2, 0);
 prettyPrint(depthList);
 prettyPrint(depthList2);
+
+//      a
+//   b    c
+// d        e
+//   g
+console.log(isBalanced(tree.root));
