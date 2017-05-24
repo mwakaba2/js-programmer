@@ -80,6 +80,19 @@ function isBalanced(root) {
   return checkHeight(root) !== Number.MIN_VALUE;
 }
 
+function validateBST(root, min, max) {
+  if(root === null) {
+    return true;
+  }
+  if((min !== null && root.val <= min) || (max !== null && root.val > max)){
+    return false;
+  }
+  if(!validateBST(root.left, min, root.val) || !validateBST(root.right, root.val, max)){
+    return false;
+  }
+  return true;
+}
+
 module.exports = {
-  TreeNode, listOfDepths, Tree, prettyPrint, listOfDepthsDFS, isBalanced
+  TreeNode, listOfDepths, Tree, prettyPrint, listOfDepthsDFS, isBalanced, validateBST
 };
