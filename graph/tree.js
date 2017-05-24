@@ -3,6 +3,7 @@ class TreeNode {
     this.val = val;
     this.left = null;
     this.right = null;
+    this.parent = null;
   }
 }
 
@@ -93,6 +94,31 @@ function validateBST(root, min, max) {
   return true;
 }
 
+function getSuccessor(root){
+  if (root === null) return null;
+  if(root.right !== null) {
+    return leftMostChild(root.right);
+  } else {
+    let curr = root;
+    let x = curr.parent;
+    while(x !== null && x.left !== curr) {
+      curr = x;
+      x = x.parent;
+    }
+    return x;
+  }
+}
+
+function leftMostChild(root) {
+  if(root == null){
+    return null;
+  }
+  while(root.left !== null) {
+    root = root.left;
+  }
+  return root;
+}
+
 module.exports = {
-  TreeNode, listOfDepths, Tree, prettyPrint, listOfDepthsDFS, isBalanced, validateBST
+  TreeNode, listOfDepths, Tree, prettyPrint, listOfDepthsDFS, isBalanced, validateBST, getSuccessor
 };
