@@ -4,17 +4,83 @@ class TreeNode {
     this.left = null;
     this.right = null;
     this.parent = null;
+    this._size = 1;
+  }
+
+  insertInOrder(value) {
+    if(value <= this.val) {
+      if(this.left === null) {
+        this.leftChild = new TreeNode(value);
+      } else {
+        this.left.insertInOrder(this.left);
+      }
+    } else {
+      if(this.right === null) {
+        this.rightChild = new TreeNode(value);
+      } else {
+        this.right.insertInOrder(value);
+      }
+    }
+    this._size++;
+  }
+
+  get size() {
+    return this._size;
+  }
+
+  find(value) {
+    if(this.val === value) {
+      return this;
+    } else if (value <= this.val) {
+      this.left.find(value);
+    } else if (value > this.val) {
+      this.right.find(value);
+    }
+    return null;
+  }
+
+  set leftChild(treeNode) {
+    this.left = treeNode;
+    if(treeNode !== null) {
+      treeNode.parent = this;
+    }
+  }
+
+  set rightChild(treeNode) {
+    this.right = treeNode;
+    if(treeNode !== null) {
+      treeNode.parent = this;
+    }
+  }
+
+  get leftMostChild() {
+    let left = this;
+    if(this === null){
+      return null;
+    }
+    while(left!== null) {
+      left = left.left;
+    }
+    return left;
+  }
+
+  get successor() {
+    if (this === null) return null;
+    if(this.right !== null) {
+      return this.right.leftMostChild;
+    } else {
+      let curr = this;
+      let x = curr.parent;
+      while(x !== null && x.left !== curr) {
+        curr = x;
+        x = x.parent;
+      }
+      return x;
+    }
   }
 }
 
-class Tree {
-  constructor(root) {
-    this.root = root;
-  }
-}
-
-function listOfDepths(tree) {
-  var root = tree.root;
+function listOfDepths(root) {
   var list = [];
   var current = [];
   if(root !== null) {
@@ -53,13 +119,15 @@ function listOfDepthsDFS(root, lists, level) {
 };
 
 function prettyPrint(depthList) {
+  let print = '';
   for(index in depthList) {
     let list = depthList[index];
     let values = list.map((treenode) => {
       return treenode.val;
     });
-    console.log(`Level ${index}: ${values}`);
+    print += `Level ${index}: ${values}\n`;
   }
+  return print;
 }
 
 function checkHeight(root) {
@@ -94,31 +162,7 @@ function validateBST(root, min, max) {
   return true;
 }
 
-function getSuccessor(root){
-  if (root === null) return null;
-  if(root.right !== null) {
-    return leftMostChild(root.right);
-  } else {
-    let curr = root;
-    let x = curr.parent;
-    while(x !== null && x.left !== curr) {
-      curr = x;
-      x = x.parent;
-    }
-    return x;
-  }
-}
-
-function leftMostChild(root) {
-  if(root == null){
-    return null;
-  }
-  while(root.left !== null) {
-    root = root.left;
-  }
-  return root;
-}
 
 module.exports = {
-  TreeNode, listOfDepths, Tree, prettyPrint, listOfDepthsDFS, isBalanced, validateBST, getSuccessor
+  TreeNode, listOfDepths, prettyPrint, listOfDepthsDFS, isBalanced, validateBST
 };
