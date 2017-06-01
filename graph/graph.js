@@ -1,16 +1,13 @@
 
 class Node {
-  constructor() {
+  constructor(name) {
+    this.name = name;
     this.adjNodes = new Array();
     this.state = false;
   }
 
   edge(node) {
     this.adjNodes.push(node);
-  }
-
-  getAdjNodes() {
-    return this.adjNodes;
   }
 
   visited() {
@@ -23,22 +20,24 @@ class Node {
 }
 
 class Graph {
-  constructor(size) {
-    this.nodes = new Array(size).fill(new Node());
+  constructor() {
+    this.adjList = new Map();
   }
 
-  getNodes() {
-    return this.nodes;
+  edge(start, end) {
+    if(!this.adjList.has(start)) {
+      this.adjList.set(start, new Node(start));
+    }
+    let node = this.adjList.get(start);
+    node.edge(end);
   }
 
-  edge(n1, n2) {
-    var startNode = this.getNode(n1);
-    var endNode = this.getNode(n2);
-    startNode.edge(endNode);
-  }
-
-  getNode(idx) {
-    return this.nodes[idx];
+  printNodes() {
+    let print = '';
+    for(let [name, node] of this.adjList) {
+      print += `${name}: ${node.adjNodes}\n`;
+    }
+    return print;
   }
 }
 

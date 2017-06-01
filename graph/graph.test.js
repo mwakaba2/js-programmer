@@ -1,5 +1,6 @@
 var { expect } = require('chai');
 var { Node, Graph } = require('./graph');
+var { buildOrder } = require('./buildOrder');
 
 describe('Node', () => {
   it('should change state when node is visited', () => {
@@ -11,15 +12,19 @@ describe('Node', () => {
 });
 
 describe('Graph', () => {
-  it('should create 6 nodes', () => {
-    var g = new Graph(6);
-    expect(g.getNodes().length).to.eql(6);
+  it('should create an adjacency list', () => {
+    let expected = '1: 2,3\n';
+    let g = new Graph();
+    g.edge(1, 2);
+    g.edge(1, 3);
+    expect(g.printNodes()).to.be.equal(expected);
   });
-  it('should create an edge between two nodes', () => {
-    var g = new Graph(6);
-    g.edge(0, 3);
-    var start = g.getNode(0);
-    var end = g.getNode(3);
-    expect(start.getAdjNodes()).to.eql([end]);
+});
+
+describe('Build Order', () => {
+  it('should return the same list for no dependencies', () => {
+    let projects = ['a', 'b', 'c'];
+    let dependencies = [];
+    expect(buildOrder(projects, dependencies)).to.eql(['a', 'b', 'c']);
   });
 });
