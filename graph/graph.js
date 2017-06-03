@@ -17,6 +17,10 @@ class Node {
   visit() {
     this.state = true;
   }
+
+  getAdjNodes() {
+    return this.adjNodes.sort();
+  }
 }
 
 class Graph {

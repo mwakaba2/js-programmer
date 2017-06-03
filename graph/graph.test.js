@@ -22,9 +22,15 @@ describe('Graph', () => {
 });
 
 describe('Build Order', () => {
+  let projects, dependencies;
   it('should return the same list for no dependencies', () => {
-    let projects = ['a', 'b', 'c'];
-    let dependencies = [];
+    projects = ['a', 'b', 'c'];
+    dependencies = [];
     expect(buildOrder(projects, dependencies)).to.eql(['a', 'b', 'c']);
+  });
+  it('should return a valid build order', () => {
+    projects = ['a', 'b', 'c', 'd', 'e', 'f'];
+    dependencies = [['a', 'd'], ['f', 'b'], ['b', 'd'], ['f', 'a'], ['d', 'c']];
+    expect(buildOrder(projects, dependencies)).to.eql(['f', 'e', 'a', 'b', 'd', 'c']);
   });
 });
